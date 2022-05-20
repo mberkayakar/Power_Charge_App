@@ -10,7 +10,9 @@ namespace PowerSarj_2022.Core.DataAccess.Concrete
 {
     public class GenericRepository<T> : IGenericRepository<T>
         where T : class, IEntity, new()
+
     {
+
 
         private readonly DbContext _db;
         public GenericRepository(DbContext db)

@@ -1,23 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PowerSarj_2022.DataAccess.Concrete.Context.Configuration;
-using PowerSarj_2022.DataAccess.Concrete.Context.DbEntities;
 using PowerSarj_2022.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
 {
     public class MyDbContext : DbContext 
     {
-        public MyDbContext(DbContextOptions options) : base(options)
+
+
+        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 
-
         }
- 
+
+        #region MyRegion
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //{
+        //    options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB; Initial Catalog=PowerChargeBerkayAKAR; Integrated Security=True;");
+        //}
+
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AdminConfiguration());
