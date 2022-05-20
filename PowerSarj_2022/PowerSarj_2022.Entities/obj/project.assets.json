@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "PowerSarj_2022.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/PowerSarj_2022.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PowerSarj_2022.Core.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "PowerSarj_2022.Core/1.0.0": {
+      "type": "project",
+      "path": "../PowerSarj_2022.Core/PowerSarj_2022.Core.csproj",
+      "msbuildProject": "../PowerSarj_2022.Core/PowerSarj_2022.Core.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "PowerSarj_2022.Core >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Muhammed Berkay AKAR\\Desktop\\PowerCharge\\PowerSarj_2022\\PowerSarj_2022.Core\\PowerSarj_2022.Core.csproj": {
+              "projectPath": "C:\\Users\\Muhammed Berkay AKAR\\Desktop\\PowerCharge\\PowerSarj_2022\\PowerSarj_2022.Core\\PowerSarj_2022.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
