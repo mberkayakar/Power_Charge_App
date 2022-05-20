@@ -160,16 +160,6 @@
         "runtime": {
           "lib/net5.0/System.Diagnostics.DiagnosticSource.dll": {}
         }
-      },
-      "PowerSarj_2022.Entities/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/PowerSarj_2022.Entities.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/PowerSarj_2022.Entities.dll": {}
-        }
       }
     }
   },
@@ -529,17 +519,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "PowerSarj_2022.Entities/1.0.0": {
-      "type": "project",
-      "path": "../PowerSarj_2022.Entities/PowerSarj_2022.Entities.csproj",
-      "msbuildProject": "../PowerSarj_2022.Entities/PowerSarj_2022.Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "Microsoft.EntityFrameworkCore >= 5.0.15",
-      "PowerSarj_2022.Entities >= 1.0.0"
+      "Microsoft.EntityFrameworkCore >= 5.0.15"
     ]
   },
   "packageFolders": {
@@ -568,11 +552,7 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {
-            "C:\\Users\\Muhammed Berkay AKAR\\Desktop\\PowerCharge\\PowerSarj_2022\\PowerSarj_2022.Entities\\PowerSarj_2022.Entities.csproj": {
-              "projectPath": "C:\\Users\\Muhammed Berkay AKAR\\Desktop\\PowerCharge\\PowerSarj_2022\\PowerSarj_2022.Entities\\PowerSarj_2022.Entities.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

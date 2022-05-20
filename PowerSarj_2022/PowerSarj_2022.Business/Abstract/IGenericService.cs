@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSarj_2022.Core.Entities
+namespace PowerSarj_2022.Business.Abstract
 {
-    public interface IEntity
+    public interface IGenericService <T>
     {
+
 
     }
 }
