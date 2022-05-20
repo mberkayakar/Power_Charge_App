@@ -1,12 +1,11 @@
 ﻿using PowerSarj_2022.Core.Entities;
-using System;
 using System.Collections.Generic;
- 
+
 namespace PowerSarj_2022.Entities.Concrete
 {
     public class Device : IEntity
     {
-        int Id;
+        public int Id { get; set; }
         public string DeviceName { get; set; }
 
         // konum bilgisi  
