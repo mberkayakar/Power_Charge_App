@@ -13,9 +13,10 @@ namespace PowerSarj_2022.Entities.Concrete
         public int Id { get; set; }
         public decimal amount { get; set; }
         public decimal lastbalance { get; set; }
+        public string admin { get; set; }
+        public DateTime date  { get; set; }
+        
+           
 
-                "admin": "recepcengiz",
-                "date": "2022-05-16 18:03:37"
-            },
     }
 }

@@ -12,9 +12,7 @@ namespace PowerSarj_2022.Entities.Concrete
         int Id;
         public string DeviceName { get; set; }
 
-        // konum bilgisi 
-        //public double latfirst { get; set; }
-        //public double latsecond { get; set; }
+        // konum bilgisi  
         public string location { get; set; }
 
 
