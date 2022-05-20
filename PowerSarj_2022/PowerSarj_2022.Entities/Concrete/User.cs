@@ -15,19 +15,13 @@ namespace PowerSarj_2022.Entities.Concrete
         public string username { get; set; }
         public string site { get; set; }
         public string password { get; set; }
-
         List<Device> devices { get; set; }
-
         List<Operation> operations { get; set; }
         public DateTime date { get; set; }
         public int __v { get; set; }
         public decimal balance { get; set; }
-        
-
-        "chargingdevice": "",
-        "updatedAt": "2022-05-16T19:25:30.296Z"
-
-
+        public string chargingdevice { get; set; }
+        public DateTime? updatedAt { get; set; }
 
     }
 }
