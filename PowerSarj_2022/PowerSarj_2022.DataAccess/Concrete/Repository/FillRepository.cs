@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using PowerSarj_2022.Core.DataAccess.Concrete;
+using PowerSarj_2022.Entities.Concrete;
 
 namespace PowerSarj_2022.DataAccess.Concrete.Repository
 {
-    internal class FillRepository
+    public class FillRepository : GenericRepository<Fill>
     {
+        public FillRepository(DbContext db) : base(db)
+        {
+        }
     }
 }

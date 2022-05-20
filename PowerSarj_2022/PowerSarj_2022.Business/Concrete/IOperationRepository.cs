@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace PowerSarj_2022.DataAccess.Abstract
 {
-    public interface IFillRepository : IGenericRepository<Fill>
+    public interface IOperationRepository : IGenericRepository<Operation>
     {
+
     }
 }

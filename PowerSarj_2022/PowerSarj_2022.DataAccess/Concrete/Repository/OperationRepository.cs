@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using PowerSarj_2022.Core.DataAccess.Concrete;
+using PowerSarj_2022.DataAccess.Abstract;
+using PowerSarj_2022.Entities.Concrete;
 
 namespace PowerSarj_2022.DataAccess.Concrete.Repository
 {
-    internal class OperationRepository
+    public class OperationRepository : GenericRepository<Operation>, IOperationRepository
     {
+        public OperationRepository(DbContext db) : base(db)
+        {
+        }
     }
 }

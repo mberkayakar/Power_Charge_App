@@ -5,13 +5,11 @@ using PowerSarj_2022.Entities.Concrete;
 
 namespace PowerSarj_2022.DataAccess.Concrete.Repository
 {
-    public class DeviceRepository : GenericRepository<Device> , IDeviceRepository
+
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        public DeviceRepository(DbContext db ): base(db)
+        public UserRepository(DbContext db) : base(db)
         {
-
-
         }
     }
-
 }
