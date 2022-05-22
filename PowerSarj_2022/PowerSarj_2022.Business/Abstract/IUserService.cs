@@ -3,8 +3,9 @@ using PowerSarj_2022.Entities.Concrete;
 
 namespace PowerSarj_2022.DataAccess.Abstract
 {
-    public interface IDeviceService : IGenericService<Device>
+    public interface IUserService: IGenericService<User>
     {
+
 
     }
 }

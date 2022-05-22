@@ -10,8 +10,8 @@ using PowerSarj_2022.DataAccess.Concrete.Context.EfContext;
 namespace PowerSarj_2022.DataAccess.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220520131934_mig1")]
-    partial class mig1
+    [Migration("20220522072234_firstmigration")]
+    partial class firstmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,12 +26,12 @@ namespace PowerSarj_2022.DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("CategoryID")
+                        .HasColumnName("AdminId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("CategoryName");
+                        .HasColumnName("AdminName");
 
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");

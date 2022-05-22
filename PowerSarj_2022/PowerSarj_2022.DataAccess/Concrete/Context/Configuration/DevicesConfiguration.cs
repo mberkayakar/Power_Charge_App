@@ -9,9 +9,13 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
         public void Configure(EntityTypeBuilder<Device> builder)
         {
             builder.HasKey(c => c.Id).HasName("DeviceId");
-            //builder.Property(c => c.Id).ValueGeneratedOnAdd();
-            //builder.Property(c => c.Id).HasColumnName("CategoryID");
-            //builder.Property(c => c.Name).HasColumnName("CategoryName");
+
+            builder.HasData(
+                new Devices
+                {
+
+                },
+ 
         }
     }
 }

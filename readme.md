@@ -1,1 +1,0 @@
-Bu proje Powersarj Backendinin .Net Platformu üzerinde geliştirilmiş bir alternatif uygulamasıdır. 

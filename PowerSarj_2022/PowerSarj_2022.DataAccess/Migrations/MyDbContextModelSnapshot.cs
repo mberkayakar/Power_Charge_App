@@ -24,12 +24,12 @@ namespace PowerSarj_2022.DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("CategoryID")
+                        .HasColumnName("AdminId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("CategoryName");
+                        .HasColumnName("AdminName");
 
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");

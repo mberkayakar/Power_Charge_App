@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PowerSarj_2022.Business.Abstract;
+using PowerSarj_2022.Business.Concrete;
+using PowerSarj_2022.Core.DataAccess.Abstract;
+using PowerSarj_2022.Core.DataAccess.Concrete;
+using PowerSarj_2022.DataAccess.Abstract;
 using PowerSarj_2022.DataAccess.Concrete.Context.EfContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using PowerSarj_2022.DataAccess.Concrete.Repository;
 
 namespace PowerSarj_2022.WebApi
 {
@@ -31,6 +30,34 @@ namespace PowerSarj_2022.WebApi
             services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
 
+            services.AddScoped<DbContext, MyDbContext>();
+
+            services.AddScoped<IAdminService, AdminManager>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
+
+            services.AddScoped<IDeviceService, DeviceManager>();
+            services.AddScoped<IDeviceRepository, DeviceRepository>();
+
+            services.AddScoped<IFillService, FillManager>();
+            services.AddScoped<IFillRepository, FillRepository>();
+
+            services.AddScoped<IOperationService, OperationManager>();
+            services.AddScoped<IOperationRepository, OperationRepository>();
+
+            services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IGenericService<>), typeof(GenericManager<>));
+
+
+             
+
+
+
+
+            services.AddScoped<IUserService, UserManager>();
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -40,7 +67,7 @@ namespace PowerSarj_2022.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env , MyDbContext db)
         {
             if (env.IsDevelopment())
             {
@@ -48,6 +75,9 @@ namespace PowerSarj_2022.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PowerSarj_2022.WebApi v1"));
             }
+
+
+            db.Database.Migrate();
 
             app.UseHttpsRedirection();
 
