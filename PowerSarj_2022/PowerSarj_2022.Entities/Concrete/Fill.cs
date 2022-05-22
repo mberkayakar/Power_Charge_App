@@ -11,8 +11,17 @@ namespace PowerSarj_2022.Entities.Concrete
         public decimal lastbalance { get; set; }
         public string admin { get; set; }
         public DateTime date  { get; set; }
-        
-           
+
+
+
+
+        // navigation property
+
+
+        public int userid { get; set; }
+        public User user { get; set; }
+
+
 
     }
 }

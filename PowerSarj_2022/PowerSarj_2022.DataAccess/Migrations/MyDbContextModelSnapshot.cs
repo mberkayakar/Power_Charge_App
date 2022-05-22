@@ -27,17 +27,60 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         .HasColumnName("AdminId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("AdminName");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id")
                         .HasName("AdminId");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Recep",
+                            Surname = "Cengiz"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Ahmet",
+                            Surname = "Yılmaz"
+                        });
+                });
+
+            modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.AllowedSites", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("DeviceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeviceId");
+
+                    b.ToTable("AllowedSites");
                 });
 
             modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.Device", b =>
@@ -47,17 +90,43 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DeviceName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DeviceId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("charginguser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("devicename")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("location")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("mobilecharging")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("site")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("state")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userid")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id")
                         .HasName("DeviceId");
+
+                    b.HasIndex("userid");
 
                     b.ToTable("Devices");
                 });
@@ -81,8 +150,16 @@ namespace PowerSarj_2022.DataAccess.Migrations
                     b.Property<decimal>("lastbalance")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("userid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userid1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id")
                         .HasName("FillId");
+
+                    b.HasIndex("userid1");
 
                     b.ToTable("Fills");
                 });
@@ -95,6 +172,9 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("MyProperty")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("_id")
                         .HasColumnType("int");
 
                     b.Property<decimal>("amount")
@@ -115,10 +195,7 @@ namespace PowerSarj_2022.DataAccess.Migrations
                     b.Property<string>("operation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("userid")
-                        .HasColumnType("int");
-
-                    b.Property<string>("userid1")
+                    b.Property<string>("userid")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id")
@@ -126,7 +203,7 @@ namespace PowerSarj_2022.DataAccess.Migrations
 
                     b.HasIndex("deviceid");
 
-                    b.HasIndex("userid1");
+                    b.HasIndex("userid");
 
                     b.ToTable("Operations");
                 });
@@ -172,6 +249,31 @@ namespace PowerSarj_2022.DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.AllowedSites", b =>
+                {
+                    b.HasOne("PowerSarj_2022.Entities.Concrete.Device", null)
+                        .WithMany("allowedSites")
+                        .HasForeignKey("DeviceId");
+                });
+
+            modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.Device", b =>
+                {
+                    b.HasOne("PowerSarj_2022.Entities.Concrete.User", "User")
+                        .WithMany("devices")
+                        .HasForeignKey("userid");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.Fill", b =>
+                {
+                    b.HasOne("PowerSarj_2022.Entities.Concrete.User", "user")
+                        .WithMany("fills")
+                        .HasForeignKey("userid1");
+
+                    b.Navigation("user");
+                });
+
             modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.Operation", b =>
                 {
                     b.HasOne("PowerSarj_2022.Entities.Concrete.Device", "device")
@@ -181,8 +283,8 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("PowerSarj_2022.Entities.Concrete.User", "user")
-                        .WithMany()
-                        .HasForeignKey("userid1");
+                        .WithMany("operations")
+                        .HasForeignKey("userid");
 
                     b.Navigation("device");
 
@@ -191,6 +293,17 @@ namespace PowerSarj_2022.DataAccess.Migrations
 
             modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.Device", b =>
                 {
+                    b.Navigation("allowedSites");
+
+                    b.Navigation("operations");
+                });
+
+            modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.User", b =>
+                {
+                    b.Navigation("devices");
+
+                    b.Navigation("fills");
+
                     b.Navigation("operations");
                 });
 #pragma warning restore 612, 618

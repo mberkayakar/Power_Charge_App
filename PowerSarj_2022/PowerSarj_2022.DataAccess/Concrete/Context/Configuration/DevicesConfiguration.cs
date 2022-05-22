@@ -10,11 +10,11 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
         {
             builder.HasKey(c => c.Id).HasName("DeviceId");
 
-            builder.HasData(
-                new Devices
-                {
+            //builder.HasData(
+            //    new Devices
+            //    {
 
-                },
+            //    },
  
         }
     }

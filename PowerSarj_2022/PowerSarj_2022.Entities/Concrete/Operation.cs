@@ -19,11 +19,15 @@ namespace PowerSarj_2022.Entities.Concrete
         public DateTime date { get; set; }
 
         // Navigation Properties 
-        public int? userid { get; set; }
+        public int? _id { get; set; }
         public User user { get; set; }
 
         public int deviceid { get; set; }
         public Device device { get; set; }
+
+
+
+
 
 
     }

@@ -25,7 +25,13 @@ namespace PowerSarj_2022.Entities.Concrete
         public string mobilecharging { get; set; }
         public string  devicename { get; set; }
         public DateTime  date { get; set; }
-         
+
+
+       
+        // Navigation Property
+        public User User { get; set; }
+
+     
 
 
 

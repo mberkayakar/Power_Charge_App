@@ -16,7 +16,8 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
         #region MyRegion
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //{
-        //    options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB; Initial Catalog=PowerChargeBerkayAKAR; Integrated Security=True;");
+
+        //    //options.UseLazyLoadingProxies();
         //}
 
         #endregion
@@ -28,6 +29,8 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
             modelBuilder.ApplyConfiguration(new FillsConfiguration());
             modelBuilder.ApplyConfiguration(new OperationsConfiguration());
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
+
+          
 
         }
 
