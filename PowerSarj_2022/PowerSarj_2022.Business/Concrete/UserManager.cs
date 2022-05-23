@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PowerSarj_2022.Business.Concrete;
+using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.Core.DataAccess.Abstract;
 using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos;
@@ -35,10 +36,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
             // Action delegate alıyor ve 
             var configuration = new MapperConfiguration(opt =>
             {
-                opt.CreateMap<UserSaveDto, User>().ForMember(x=> x.userid , dto => dto.MapFrom(x=> x.UserId));
-                opt.CreateMap<UserSaveDto, User>().ForMember(x => x.date, dto => dto.MapFrom(x => x.date));
-
-                //opt.CreateMap<User, UserSaveDto>(); // Tersten mapleme için gerçerlidir. 
+                opt.AddProfile(new UserToUserSaveMapping() );
 
             });
             // yukarıdaki kod üzerinden hangi nesneleri birbirlerine 
@@ -48,6 +46,10 @@ namespace PowerSarj_2022.DataAccess.Abstract
             // nesne dönmektedir. 
 
             var model2 = mapper.Map<User>(usermodule);
+            model2.date = DateTime.Now;
+
+
+            _userService.Add(model2);
 
 
             Console.WriteLine("Deneme 1 ,2 ,3 ");

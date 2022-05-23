@@ -91,7 +91,7 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
             var model = userdto;
-            _userService.SaveUser(model);
+            _userService.SaveUser(model); 
 
             return Ok(model);
 
