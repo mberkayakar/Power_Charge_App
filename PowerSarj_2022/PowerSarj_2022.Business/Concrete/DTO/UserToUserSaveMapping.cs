@@ -17,7 +17,12 @@ namespace PowerSarj_2022.Business.Concrete.DTO
             CreateMap<UserSaveDto, User>().ForMember(x => x.site, dto => dto.MapFrom(x => x.site)).ReverseMap();
             CreateMap<UserSaveDto, User>().ForMember(x => x.userid, dto => dto.MapFrom(x => x.UserId)).ReverseMap();
             CreateMap<UserSaveDto, User>().ForMember(x => x.username, dto => dto.MapFrom(x => x.username)).ReverseMap();
+            CreateMap<UserSaveDto, User>().ForMember(x => x.devices, dto => dto.Ignore()).ReverseMap();
 
+
+
+            // yukarıdaki kod üzerinden hangi nesneleri birbirlerine 
+            // dönebileceğinin analizi yapılmakyadır .
         }
     }
 }

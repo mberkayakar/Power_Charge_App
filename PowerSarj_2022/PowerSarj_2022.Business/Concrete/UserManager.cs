@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PowerSarj_2022.Business.Concrete;
 using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.Core.DataAccess.Abstract;
@@ -6,19 +7,23 @@ using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace PowerSarj_2022.DataAccess.Abstract
 {
 
+
+
     public class UserManager : GenericManager<User>, IUserService
     {
 
         private readonly IUserRepository _userService;
+        private readonly DbContext _db;
 
-        public UserManager(IUserRepository genericRepository) : base(genericRepository)
+        public UserManager(IUserRepository genericRepository , DbContext db) : base(genericRepository)
         {
-
+            _db = db;
             _userService = genericRepository;
 
         }
@@ -29,30 +34,46 @@ namespace PowerSarj_2022.DataAccess.Abstract
         }
 
         public void SaveUser(UserSaveDto usermodule)
-        {
-            var model = usermodule;
+        { 
 
-
-            // Action delegate alıyor ve 
             var configuration = new MapperConfiguration(opt =>
             {
                 opt.AddProfile(new UserToUserSaveMapping() );
-
             });
-            // yukarıdaki kod üzerinden hangi nesneleri birbirlerine 
-            // dönebileceğinin analizi yapılmakyadır .
-
-            var mapper = configuration.CreateMapper(); // IMApper şeklinde bir
-            // nesne dönmektedir. 
-
-            var model2 = mapper.Map<User>(usermodule);
-            model2.date = DateTime.Now;
+            
+            var mapper = configuration.CreateMapper();  
+            
+            var model = mapper.Map<User>(usermodule);
+            
+            model.date = DateTime.Now;
 
 
-            _userService.Add(model2);
+            model.devices = new List<Device>();
 
 
-            Console.WriteLine("Deneme 1 ,2 ,3 ");
+
+
+            foreach (var item in usermodule.devices)
+            {
+                try
+                {
+                    dynamic singledevice = _db.Set<Device>().FirstOrDefault(x => x.devicename == item);
+                    if (singledevice != null)
+                    {
+                        model.devices.Add(singledevice);
+                    }
+
+                }
+                catch (ArgumentException ex)
+                {
+                    
+                   
+                }
+            }
+
+            _userService.Add(model);
+
+
 
 
         }
