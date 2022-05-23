@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "sd/Tvs03n1b9qSranWgk3nC8y6CnnJMjq17RBNcgB6QgnHKhiukn1SHUAoEay1MIrO31P7xGfvTde071gAj9nw==",
+  "dgSpecHash": "dKED+gpj5F6Q0fW/JfJiZuJS1sq+dUUkVtbPGgkse2Uw/Os54OWLaHpr0/UXrHF9Uz7tF3jPbjetjMEoQGXTQg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Muhammed Berkay AKAR\\Desktop\\PowerCharge\\PowerSarj_2022\\PowerSarj_2022.Business\\PowerSarj_2022.Business.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
-    "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",
     "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.15\\microsoft.entityframeworkcore.5.0.15.nupkg.sha512",

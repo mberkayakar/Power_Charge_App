@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "i8RfRGu0KHW/DjpvUoTRJpjv+7G+SLFeQ6FoahAy7ul3K0mJ8b5/bJ/yZDYulqJgJ5N3bEywduPBocBpPvg4Rg==",
+  "dgSpecHash": "dzmbVeJ9sUB9C3GkPTCK+3HkXZjQMoL4cLFKUJDtB4j3Zg7RgF4jUbxygogkPzWl4PZfLNsWqKoeGGOMW8d9Hg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Muhammed Berkay AKAR\\Desktop\\PowerCharge\\PowerSarj_2022\\PowerSarj_2022.WebApi\\PowerSarj_2022.WebApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Muhammed Berkay AKAR\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.15\\microsoft.aspnetcore.jsonpatch.5.0.15.nupkg.sha512",

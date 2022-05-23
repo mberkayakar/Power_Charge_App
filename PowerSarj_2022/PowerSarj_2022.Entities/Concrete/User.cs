@@ -9,27 +9,27 @@ namespace PowerSarj_2022.Entities.Concrete
     {
 
         // Sistemdeki userlar (otomatları kullanan kullanıcılar yani )
-        public int _id { get; set; }  // PK 
-        public string userid { get; set; }  // string olması gerekiyo
-        public string cardid { get; set; }
-        public string username { get; set; }    // unique olacak 
-        public string site { get; set; }  // bilmiyorum 
-        public string password { get; set; }
+            public int _id { get; set; }  // PK 
+            public string userid { get; set; }  // string olması gerekiyo
+            public string cardid { get; set; }
+            public string username { get; set; }    // unique olacak 
+            public string site { get; set; }  // bilmiyorum 
+            public string password { get; set; }
 
        
-        public List<Device> devices { get; set; }  // sadece string olarak isim geliyo oda device id nin kendi ismi // yüksek ihtimal dto kullanabilirm 
+            public List<Device> devices { get; set; }  // sadece string olarak isim geliyo oda device id nin kendi ismi // yüksek ihtimal dto kullanabilirm 
   
 
-        public List<Operation> operations { get; set; }  // Operasyon listesi 
+            public List<Operation> operations { get; set; }  // Operasyon listesi 
  
 
-        public List<Fill> fills { get; set; } // 1 user in  birden çok fill i olabilir 
+            public List<Fill> fills { get; set; } // 1 user in  birden çok fill i olabilir 
 
-        public DateTime date { get; set; }
-        public int __v { get; set; }
-        public decimal balance { get; set; }
-        public string chargingdevice { get; set; }
-        public DateTime? updatedAt { get; set; }
+            public DateTime date { get; set; }
+            public int __v { get; set; }
+            public decimal balance { get; set; }
+            public string chargingdevice { get; set; }
+            public DateTime? updatedAt { get; set; }
 
     }
 }

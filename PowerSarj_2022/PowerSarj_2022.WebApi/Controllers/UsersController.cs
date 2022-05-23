@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PowerSarj_2022.DataAccess.Abstract;
 using PowerSarj_2022.DataAccess.Concrete.Context.EfContext;
 using PowerSarj_2022.Entities.Concrete;
+using PowerSarj_2022.Entities.Concrete.Dtos;
 using System.Linq;
 
 namespace PowerSarj_2022.WebApi.Controllers
@@ -76,20 +77,46 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         }
 
-        [HttpPost]  // fils ve operation kaydedemiyor tek problemi o onun üzerinde yogunlaşacagız ..
-        public IActionResult SaveUSer([FromBody] User user)
+
+
+
+
+
+        [HttpPost]
+        public IActionResult SaveUser(UserSaveDto userdto)
         {
-            if (user != null)
-            {
-                _userService.Add(user);
 
 
-                return Ok(user);
-            }
 
-            return BadRequest("İşlem tamamlanamadı bir problem meydana geldi ");
-            
+
+
+            var model = userdto;
+            _userService.SaveUser(model);
+
+            return Ok(model);
+
 
         }
+
+
+        #region Eski Kodlar 
+
+        //[HttpPost]  // fils ve operation kaydedemiyor tek problemi o onun üzerinde yogunlaşacagız ..
+        //public IActionResult SaveUSer([FromBody] User user)
+        //{
+        //    if (user != null)
+        //    {
+        //        _userService.Add(user);
+
+
+        //        return Ok(user);
+        //    }
+
+        //    return BadRequest("İşlem tamamlanamadı bir problem meydana geldi ");
+
+
+        //}
+        #endregion
+
     }
 }
