@@ -9,13 +9,7 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
         public void Configure(EntityTypeBuilder<Device> builder)
         {
             builder.HasKey(c => c.Id).HasName("DeviceId");
-
-            //builder.HasData(
-            //    new Devices
-            //    {
-
-            //    },
- 
+            
         }
     }
 }

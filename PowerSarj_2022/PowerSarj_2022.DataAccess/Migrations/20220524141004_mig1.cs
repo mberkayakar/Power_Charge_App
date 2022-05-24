@@ -51,7 +51,6 @@ namespace PowerSarj_2022.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DeviceId = table.Column<int>(type: "int", nullable: false),
                     location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     site = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -61,17 +60,17 @@ namespace PowerSarj_2022.DataAccess.Migrations
                     mobilecharging = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     devicename = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    userid = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("DeviceId", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Devices_Users_userid",
-                        column: x => x.userid,
+                        name: "FK_Devices_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "userid",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -151,25 +150,15 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Admins",
-                columns: new[] { "AdminId", "Email", "AdminName", "Password", "Surname", "UserName" },
-                values: new object[] { 1, null, "Recep", null, "Cengiz", null });
-
-            migrationBuilder.InsertData(
-                table: "Admins",
-                columns: new[] { "AdminId", "Email", "AdminName", "Password", "Surname", "UserName" },
-                values: new object[] { 2, null, "Ahmet", null, "Yılmaz", null });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AllowedSites_DeviceId",
                 table: "AllowedSites",
                 column: "DeviceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Devices_userid",
+                name: "IX_Devices_UserId",
                 table: "Devices",
-                column: "userid");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fills_userid1",

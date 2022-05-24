@@ -9,6 +9,7 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(c => c.userid).HasName("UserId");
+          
         }
     }
 }

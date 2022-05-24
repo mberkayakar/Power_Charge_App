@@ -30,11 +30,18 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
         public IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null)
         {
+            dynamic model;
 
+            if (filter != null)
+            {
+                model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).Where(filter).ToList();
 
-            var model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
+            }
+            else
+            {
+                model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
 
-
+            }
 
 
             var configuration = new MapperConfiguration(opt =>
@@ -49,26 +56,26 @@ namespace PowerSarj_2022.DataAccess.Abstract
             #region Boş Kodlar 
 
 
-            List<string> suruculer = new List<string>();
+            //List<string> suruculer = new List<string>();
 
-            List<Device> devices = new List<Device>();
-            List<Operation> opt = new List<Operation>();
-            List<Fill> fills = new List<Fill>();
+            //List<Device> devices = new List<Device>();
+            //List<Operation> opt = new List<Operation>();
+            //List<Fill> fills = new List<Fill>();
 
 
-            foreach (var item in model)
-            {
-                foreach (var item2 in item.devices)
-                {
-                    suruculer.Add(item2.devicename);
-                }
+            //foreach (var item in model)
+            //{
+            //    foreach (var item2 in item.devices)
+            //    {
+            //        suruculer.Add(item2.devicename);
+            //    }
 
-                var gecicimodel = model.FirstOrDefault(x => x.userid == item.userid);
-                gecicimodel.devices
+            //    var gecicimodel = model.FirstOrDefault(x => x.userid == item.userid);
+            //    gecicimodel.devices
                 
 
 
-            }
+            //}
 
 
 
@@ -84,10 +91,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
         {
             throw new NotImplementedException();
         }
-
-        
-     
-
+         
         public void SaveUser(UserSaveDto usermodule)
         {
 
@@ -125,6 +129,46 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
 
 
+        }
+
+        public User UpdatedUserModel( AddOperationFromUser addoperationfromuser , Expression<Func<User, bool>> filter = null)
+        {
+            var model = _db.Set<User>().Where(filter).Include(x=> x.fills).FirstOrDefault();
+
+            if (model != null)
+            {
+                if (model.fills == null)
+                {
+                    model.fills = new List<Fill>();
+                }
+                model.fills.AddRange(addoperationfromuser.fills);
+            }
+            else
+            {
+                return null; 
+            }
+
+            _userService.Update(model);
+
+            return model;
+
+
+
+        }
+
+        public User UserLogin(UserLoginDto userlogindto)
+        {
+
+
+             dynamic model = _userService.GetAll(x=> x.userid == userlogindto.UserId && x.password == userlogindto.Password).FirstOrDefault();
+            if (model != null)
+            {
+                return model;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

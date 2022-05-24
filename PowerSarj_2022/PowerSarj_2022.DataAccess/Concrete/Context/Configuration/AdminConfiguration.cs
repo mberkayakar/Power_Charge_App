@@ -13,26 +13,26 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.Configuration
             builder.Property(c => c.Id).ValueGeneratedOnAdd();
             builder.Property(c => c.Id).HasColumnName("AdminId");
             builder.Property(c => c.Name).HasColumnName("AdminName");
+             
+            //builder.HasData(
+            //    new Admin
+            //    {
+            //        Id = 1,
+            //        Name = "Recep",
+            //        Surname = "Cengiz",
+            //    },
+
+            //    new Admin
+            //    {
+            //        Id = 2,
+            //        Name = "Ahmet",
+            //        Surname = "Yılmaz",
+            //    }
+
+            //    );
 
 
-
-            builder.HasData(
-                new Admin
-                {
-                    Id = 1,
-                    Name = "Recep",
-                    Surname = "Cengiz",
-                },
-
-                new Admin
-                {
-                    Id = 2,
-                    Name = "Ahmet",
-                    Surname = "Yılmaz",
-                }
-
-                );
-
+            
 
 
         }

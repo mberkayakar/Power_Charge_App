@@ -47,20 +47,6 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         .HasName("AdminId");
 
                     b.ToTable("Admins");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Recep",
-                            Surname = "Cengiz"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Ahmet",
-                            Surname = "Yılmaz"
-                        });
                 });
 
             modelBuilder.Entity("PowerSarj_2022.Entities.Concrete.AllowedSites", b =>
@@ -90,11 +76,11 @@ namespace PowerSarj_2022.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DeviceId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("charginguser")
                         .HasColumnType("nvarchar(max)");
@@ -120,13 +106,10 @@ namespace PowerSarj_2022.DataAccess.Migrations
                     b.Property<string>("state")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("userid")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id")
                         .HasName("DeviceId");
 
-                    b.HasIndex("userid");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Devices");
                 });
@@ -260,7 +243,8 @@ namespace PowerSarj_2022.DataAccess.Migrations
                 {
                     b.HasOne("PowerSarj_2022.Entities.Concrete.User", "User")
                         .WithMany("devices")
-                        .HasForeignKey("userid");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
                 });

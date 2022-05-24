@@ -1,4 +1,5 @@
 ﻿using PowerSarj_2022.Business.Abstract;
+using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos;
 using System;
@@ -15,6 +16,13 @@ namespace PowerSarj_2022.DataAccess.Abstract
         void SaveUser(UserSaveDto usermodule);
 
         IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null);
+
+        User UpdatedUserModel (AddOperationFromUser addoperationfromuser , Expression<Func<User, bool>> filter = null);
+
+        User UserLogin(UserLoginDto userlogindto);
+
+
+
 
 
 

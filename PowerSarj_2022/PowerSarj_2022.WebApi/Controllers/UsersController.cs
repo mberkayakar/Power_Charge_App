@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.DataAccess.Abstract;
-using PowerSarj_2022.DataAccess.Concrete.Context.EfContext;
-using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos;
-using System.Linq;
 
 namespace PowerSarj_2022.WebApi.Controllers
 {
@@ -27,41 +24,31 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         }
 
+         
 
 
-
-        [HttpGet("aaa")]
-        public IActionResult Index()
-        {
-            // https://www.c-sharpcorner.com/blogs/eager-loading-in-repository-pattern-entity-framework-core
-
-            //var model = _userService.GetAllUserİnformation(
-            //    filter: x => x.userid == "" && x.balance != 0  ,  ;
-
-
-
-            //if (model != null)
-            //{
-            //    return Ok(model);
-
-            //}
-            //else
-            //{
-            //    return NotFound(model);
-            //}
-
-
-            return Ok();
-
-        }
-
-
-
-        [HttpGet]
+        [HttpGet] // Complete
         public IActionResult GetAllUsers()
         {
 
             var model = _userService.GetAllUsers();
+
+            if (model != null)
+            {
+                 return Ok(model);
+            }
+            else
+            {
+                return NotFound("Sistemde Kayıtlı herhangi bir kullanıcı bulunamadı ");
+            }
+
+        }
+
+        [HttpGet("{_id}")] // Complete
+        public IActionResult GetAllUsersWithId(string _id)
+        {
+
+            var model = _userService.GetAllUsers(x=> x.userid== _id);
 
             if (model != null)
             {
@@ -74,14 +61,84 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         }
 
+        [HttpGet("bysite/{sitename}")] // Complete 
+        public IActionResult GetAllUserWithSiteParameter(string sitename)
+        {
+            var model = _userService.GetAllUsers(x => x.site == sitename);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return Ok(model);
+        }
 
 
-        [HttpPost]
+        [HttpPost] // complete 
         public IActionResult SaveUser(UserSaveDto userdto)
         {
             _userService.SaveUser(userdto); 
             return Ok(userdto);
         }
+
+
+        [HttpPost("addoperation")] // complete 
+        public IActionResult AddOperationFromUser(AddOperationFromUser userdto)
+        {
+            if (userdto != null)
+            {
+                _userService.UpdatedUserModel(filter: x=> x.userid ==  userdto.userid ,addoperationfromuser: userdto);
+                return Ok(userdto);
+
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [HttpPost("login")] // complete // burada userlarin login olma isteklerini düşündüm projede anladıgım kadarı ile burası admin için kullanılmış.
+        public IActionResult Loginevent(UserLoginDto userlogindto)
+        {
+            if (userlogindto.Password != "" && userlogindto.UserId != "")
+            {
+                var model = _userService.UserLogin(userlogindto);
+                if (model != null)
+                {
+                    return Ok(model);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+
+            return BadRequest("Lütfen Geçerli Bir şifre ve kullanıcıbilgisi giriniz ");
+        }
+
+
+
+        [HttpDelete("{id}")] // complete // burada userlarin login olma isteklerini düşündüm projede anladıgım kadarı ile burası admin için kullanılmış.
+        public IActionResult DeleteUser(UserLoginDto userlogindto)
+        {
+            if (userlogindto.Password != "" && userlogindto.UserId != "")
+            {
+                var model = _userService.UserLogin(userlogindto);
+                if (model != null)
+                {
+                    return Ok(model);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+
+            return BadRequest("Lütfen Geçerli Bir şifre ve kullanıcıbilgisi giriniz ");
+        }
+
+
 
 
         #region Eski Kodlar 
@@ -99,6 +156,32 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         //    return BadRequest("İşlem tamamlanamadı bir problem meydana geldi ");
 
+
+        //}
+
+
+        //[HttpGet("aaa")]
+        //public IActionResult Index()
+        //{
+        //    // https://www.c-sharpcorner.com/blogs/eager-loading-in-repository-pattern-entity-framework-core
+
+        //    //var model = _userService.GetAllUserİnformation(
+        //    //    filter: x => x.userid == "" && x.balance != 0  ,  ;
+
+
+
+        //    //if (model != null)
+        //    //{
+        //    //    return Ok(model);
+
+        //    //}
+        //    //else
+        //    //{
+        //    //    return NotFound(model);
+        //    //}
+
+
+        //    return Ok();
 
         //}
         #endregion

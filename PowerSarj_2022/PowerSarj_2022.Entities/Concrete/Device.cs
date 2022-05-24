@@ -7,9 +7,7 @@ namespace PowerSarj_2022.Entities.Concrete
     public class Device : IEntity
     {
         public int Id { get; set; }
-        public int DeviceId { get; set; }
 
-        // konum bilgisi  
         public string location { get; set; }
 
 
@@ -29,9 +27,10 @@ namespace PowerSarj_2022.Entities.Concrete
 
        
         // Navigation Property
-        public virtual User User { get; set; }
+        public  User User { get; set; }
+        public string UserId { get; set; }
 
-     
+
 
 
 
