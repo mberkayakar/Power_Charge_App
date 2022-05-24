@@ -30,18 +30,30 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
         public IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null)
         {
-            dynamic model;
 
-            if (filter != null)
-            {
-                model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).Where(filter).ToList();
 
-            }
-            else
-            {
-                model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
 
-            }
+
+           var  model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
+
+
+
+            //if (filter != null)
+            //{
+            //    model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).Where(filter).ToList();
+
+            //}
+            //else
+            //{
+
+            //}
+
+
+
+
+
+
+
 
 
             var configuration = new MapperConfiguration(opt =>
@@ -53,34 +65,26 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
             var model2 = mapper.Map<List<UserListDto>>(model);
 
+
+
+
             #region Boş Kodlar 
 
 
-            //List<string> suruculer = new List<string>();
+          
+  
 
-            //List<Device> devices = new List<Device>();
-            //List<Operation> opt = new List<Operation>();
-            //List<Fill> fills = new List<Fill>();
+            List<Device> devices2 = new List<Device>();
+            foreach (var item in model)
+            {
+                List<string> suruculer = new List<string>();
 
+                foreach (var item2 in item.devices)
+                    suruculer.Add(item2.devicename);
 
-            //foreach (var item in model)
-            //{
-            //    foreach (var item2 in item.devices)
-            //    {
-            //        suruculer.Add(item2.devicename);
-            //    }
-
-            //    var gecicimodel = model.FirstOrDefault(x => x.userid == item.userid);
-            //    gecicimodel.devices
-                
-
-
-            //}
-
-
-
-
-
+                model2.FirstOrDefault(x => x.UserId == item.userid).devices = suruculer;
+            }
+        
             #endregion
 
 

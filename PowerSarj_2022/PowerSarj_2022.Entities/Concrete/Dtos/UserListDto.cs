@@ -17,7 +17,7 @@ namespace PowerSarj_2022.Entities.Concrete.Dtos
         public string site { get; set; }
         public string password { get; set; }
 
-        //public List<string> devices { get; set; }
+        public List<string> devices { get; set; }
         public List<Operation> operations { get; set; }
         public DateTime date { get; set; }
         public int __v { get; set; }

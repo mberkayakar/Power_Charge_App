@@ -23,7 +23,7 @@ namespace PowerSarj_2022.Business.Concrete.DTO
 
 
             // eşleme yapmaması için 
-            //CreateMap<UserSaveDto, User>().ForMember(x => x.devices, dto => dto.Ignore()).ReverseMap();
+            CreateMap<UserSaveDto, User>().ForMember(x => x.devices, dto => dto.Ignore()).ReverseMap();
 
 
 
