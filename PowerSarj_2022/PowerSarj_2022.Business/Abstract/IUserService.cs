@@ -13,7 +13,9 @@ namespace PowerSarj_2022.DataAccess.Abstract
         IEnumerable<User> GetAllUserİnformation(Expression<Func<User, bool>> filter, params Expression<Func<User, object>>[] children );
 
         void SaveUser(UserSaveDto usermodule);
-        
+
+        IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null);
+
 
 
     }

@@ -19,7 +19,7 @@ namespace PowerSarj_2022.Entities.Concrete
 
 
         public int userid { get; set; }
-        public User user { get; set; }
+        public virtual User user { get; set; }
 
 
 

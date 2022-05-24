@@ -28,29 +28,80 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
         }
 
-        public IEnumerable<User> GetAllUserİnformation(Expression<Func<User, bool>> filter, params Expression<Func<User, object>>[] children )
+        public IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null)
         {
-            return _userService.GetAllUserİnformation(filter,children);
-        }
 
-        public void SaveUser(UserSaveDto usermodule)
-        { 
+
+            var model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
+
+
+
 
             var configuration = new MapperConfiguration(opt =>
             {
-                opt.AddProfile(new UserToUserSaveMapping() );
+                opt.AddProfile(new UserListMapper());
             });
-            
-            var mapper = configuration.CreateMapper();  
-            
+
+            var mapper = configuration.CreateMapper();
+
+            var model2 = mapper.Map<List<UserListDto>>(model);
+
+            #region Boş Kodlar 
+
+
+            List<string> suruculer = new List<string>();
+
+            List<Device> devices = new List<Device>();
+            List<Operation> opt = new List<Operation>();
+            List<Fill> fills = new List<Fill>();
+
+
+            foreach (var item in model)
+            {
+                foreach (var item2 in item.devices)
+                {
+                    suruculer.Add(item2.devicename);
+                }
+
+                var gecicimodel = model.FirstOrDefault(x => x.userid == item.userid);
+                gecicimodel.devices
+                
+
+
+            }
+
+
+
+
+
+            #endregion
+
+
+            return model2;
+        }
+
+        public IEnumerable<User> GetAllUserİnformation(Expression<Func<User, bool>> filter, params Expression<Func<User, object>>[] children)
+        {
+            throw new NotImplementedException();
+        }
+
+        
+     
+
+        public void SaveUser(UserSaveDto usermodule)
+        {
+
+            var configuration = new MapperConfiguration(opt =>
+            {
+                opt.AddProfile(new UserToUserSaveMapping());
+            });
+
+            var mapper = configuration.CreateMapper();
+
             var model = mapper.Map<User>(usermodule);
-            
+
             model.date = DateTime.Now;
-
-
             model.devices = new List<Device>();
-
-
 
 
             foreach (var item in usermodule.devices)
@@ -66,8 +117,6 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 }
                 catch (ArgumentException ex)
                 {
-                    
-                   
                 }
             }
 

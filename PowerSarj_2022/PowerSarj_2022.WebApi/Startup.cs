@@ -27,8 +27,11 @@ namespace PowerSarj_2022.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
+            // lazy loading i aktif etmek için 
+
+            //.UseLazyLoadingProxies() 
+            services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddScoped<DbContext, MyDbContext>();
 

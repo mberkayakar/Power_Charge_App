@@ -16,8 +16,8 @@ namespace PowerSarj_2022.Entities.Concrete
         // AC - DC olma durumu 
         public string Type { get; set; }
 
-        public List<Operation> operations { get; set; }
-        public List<AllowedSites> allowedSites { get; set; }
+        public virtual List<Operation> operations { get; set; }
+        public virtual List<AllowedSites> allowedSites { get; set; }
         public string site { get; set; }
         public string state { get; set; } // sanırım 0 1 gibi bişi 
         public decimal price { get; set; }
@@ -29,7 +29,7 @@ namespace PowerSarj_2022.Entities.Concrete
 
        
         // Navigation Property
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
      
 

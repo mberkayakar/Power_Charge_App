@@ -20,10 +20,10 @@ namespace PowerSarj_2022.Entities.Concrete
 
         // Navigation Properties 
         public int? _id { get; set; }
-        public User user { get; set; }
+        public virtual User user { get; set; }
 
         public int deviceid { get; set; }
-        public Device device { get; set; }
+        public virtual Device device { get; set; }
 
 
 

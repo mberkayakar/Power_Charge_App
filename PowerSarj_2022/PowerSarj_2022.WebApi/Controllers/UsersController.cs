@@ -58,44 +58,29 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
         [HttpGet]
-        public IActionResult Index2()
+        public IActionResult GetAllUsers()
         {
 
+            var model = _userService.GetAllUsers();
 
-
-            //var model = _userService.GetAll();
-
-
-            //var model = db.Users.Include(x => x.operations).ToList() ;
-
-            //if (model!= null)
-            //{
-                return Ok();
-
-       
-
+            if (model != null)
+            {
+                return Ok(model);
+            }
+            else
+            {
+                return NotFound("Sistemde Kayıtlı herhangi bir kullanıcı bulunamadı ");
+            }
 
         }
-
-
-
 
 
 
         [HttpPost]
         public IActionResult SaveUser(UserSaveDto userdto)
         {
-
-
-
-
-
-            var model = userdto;
-            _userService.SaveUser(model); 
-
-            return Ok(model);
-
-
+            _userService.SaveUser(userdto); 
+            return Ok(userdto);
         }
 
 

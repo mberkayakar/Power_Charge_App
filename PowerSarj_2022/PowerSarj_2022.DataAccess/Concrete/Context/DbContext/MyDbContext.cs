@@ -10,7 +10,7 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
-
+           
         }
 
         #region MyRegion

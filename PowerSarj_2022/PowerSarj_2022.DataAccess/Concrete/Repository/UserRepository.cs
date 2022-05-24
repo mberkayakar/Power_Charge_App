@@ -20,6 +20,9 @@ namespace PowerSarj_2022.DataAccess.Concrete.Repository
             _dbContext = db;
         }
 
+        
+
+
         public IEnumerable<User> GetAllUserİnformation(Expression<Func<User, bool>> filter, params Expression<Func<User, object>>[] children)
         {
             var query = _dbContext.Set<User>().AsQueryable();
