@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PowerSarj_2022.Business.Concrete.DTO
 {

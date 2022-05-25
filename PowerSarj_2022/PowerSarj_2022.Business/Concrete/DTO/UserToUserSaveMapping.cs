@@ -8,7 +8,6 @@ namespace PowerSarj_2022.Business.Concrete.DTO
     {
         public UserToUserSaveMapping()
         {
-
             CreateMap<UserSaveDto, User>().ForMember(x => x.balance, dto => dto.MapFrom(x => x.balance)).ReverseMap();
             CreateMap<UserSaveDto, User>().ForMember(x => x.cardid, dto => dto.MapFrom(x => x.cardid)).ReverseMap();
             CreateMap<UserSaveDto, User>().ForMember(x => x.date, dto => dto.MapFrom(x => x.date)).ReverseMap();
@@ -18,11 +17,7 @@ namespace PowerSarj_2022.Business.Concrete.DTO
             CreateMap<UserSaveDto, User>().ForMember(x => x.userid, dto => dto.MapFrom(x => x.UserId)).ReverseMap();
             CreateMap<UserSaveDto, User>().ForMember(x => x.username, dto => dto.MapFrom(x => x.username)).ReverseMap();
             CreateMap<UserSaveDto, User>().ForMember(x => x.devices, dto => dto.Ignore()).ReverseMap();
-            
-
-
-            // yukarıdaki kod üzerinden hangi nesneleri birbirlerine 
-            // dönebileceğinin analizi yapılmakyadır .
+         
         }
     }
 }

@@ -44,7 +44,7 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         }
 
-        [HttpGet("{_id}")] // Complete
+        [HttpGet("{_id}")]  // Complete
         public IActionResult GetAllUsersWithId(string _id)
         {
 
@@ -61,7 +61,7 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         }
 
-        [HttpGet("bysite/{sitename}")] // Complete 
+        [HttpGet("bysite/{sitename}")] // Complete
         public IActionResult GetAllUserWithSiteParameter(string sitename)
         {
             var model = _userService.GetAllUsers(x => x.site == sitename);
@@ -74,7 +74,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         }
 
 
-        [HttpPost] // complete 
+        [HttpPost]  // Complete 
         public IActionResult SaveUser(UserSaveDto userdto)
         {
             _userService.SaveUser(userdto); 
@@ -82,7 +82,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         }
 
 
-        [HttpPost("addoperation")] // complete 
+        [HttpPost("addoperation")]  // Complete
         public IActionResult AddOperationFromUser(AddOperationFromUser userdto)
         {
             if (userdto != null)
@@ -98,7 +98,9 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         }
 
-        [HttpPost("login")] // complete // burada userlarin login olma isteklerini düşündüm projede anladıgım kadarı ile burası admin için kullanılmış.
+       
+        
+        [HttpPost("login")]  // Bitmedi buna JWT eklenecek // burada userlarin login olma isteklerini düşündüm projede anladıgım kadarı ile burası admin için kullanılmış.
         public IActionResult Loginevent(UserLoginDto userlogindto)
         {
             if (userlogindto.Password != "" && userlogindto.UserId != "")
@@ -119,12 +121,12 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
 
-        [HttpDelete("{id}")] // complete // burada userlarin login olma isteklerini düşündüm projede anladıgım kadarı ile burası admin için kullanılmış.
-        public IActionResult DeleteUser(UserLoginDto userlogindto)
+        [HttpDelete("{id}")]   // Complete // verilen user id ye göre user in bilgilerinin silinmesi
+        public IActionResult DeleteUser(string id)
         {
-            if (userlogindto.Password != "" && userlogindto.UserId != "")
+            if (id != null && id!= "" )
             {
-                var model = _userService.UserLogin(userlogindto);
+                var model = _userService.DeleteUserWithUserId(id);
                 if (model != null)
                 {
                     return Ok(model);
@@ -138,9 +140,23 @@ namespace PowerSarj_2022.WebApi.Controllers
             return BadRequest("Lütfen Geçerli Bir şifre ve kullanıcıbilgisi giriniz ");
         }
 
+        [HttpPut("{id}")]  // Complete 
+        public IActionResult UpdateUserİnformation(UserUpdateDTO userdto)
+        {
 
+            if (userdto.userid!=null)
+            {
+                _userService.UpdatedUserModel(userdto);
+            return Ok(userdto);
 
+            }
+            else
+            {
+                return NotFound("Bu şekilde bir user sistemde kayıtlı değildir. Bu sebepten ötürü güncelleme gerçekleşmemiştir.");
+            }
+        }
 
+        
         #region Eski Kodlar 
 
         //[HttpPost]  // fils ve operation kaydedemiyor tek problemi o onun üzerinde yogunlaşacagız ..

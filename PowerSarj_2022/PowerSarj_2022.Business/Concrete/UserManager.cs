@@ -28,32 +28,23 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
         }
 
+
+        // Çalışıyor
         public IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null)
         {
+            var model = new List<User>();
 
+            if (filter != null)
+            {
+                model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).Where(filter).ToList();
+            }
+            else
+            {
+                model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
 
+            }
 
-
-           var  model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
-
-
-
-            //if (filter != null)
-            //{
-            //    model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).Where(filter).ToList();
-
-            //}
-            //else
-            //{
-
-            //}
-
-
-
-
-
-
-
+        
 
 
             var configuration = new MapperConfiguration(opt =>
@@ -66,13 +57,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
             var model2 = mapper.Map<List<UserListDto>>(model);
 
 
-
-
-            #region Boş Kodlar 
-
-
-          
-  
+             
 
             List<Device> devices2 = new List<Device>();
             foreach (var item in model)
@@ -85,17 +70,19 @@ namespace PowerSarj_2022.DataAccess.Abstract
                 model2.FirstOrDefault(x => x.UserId == item.userid).devices = suruculer;
             }
         
-            #endregion
+       
 
 
             return model2;
         }
 
+        // Çalışıyor
         public IEnumerable<User> GetAllUserİnformation(Expression<Func<User, bool>> filter, params Expression<Func<User, object>>[] children)
         {
             throw new NotImplementedException();
         }
-         
+
+        // Çalışıyor
         public void SaveUser(UserSaveDto usermodule)
         {
 
@@ -135,6 +122,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
         }
 
+        
         public User UpdatedUserModel( AddOperationFromUser addoperationfromuser , Expression<Func<User, bool>> filter = null)
         {
             var model = _db.Set<User>().Where(filter).Include(x=> x.fills).FirstOrDefault();
@@ -160,6 +148,8 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
         }
 
+
+        // Çalışıyor
         public User UserLogin(UserLoginDto userlogindto)
         {
 
@@ -173,6 +163,89 @@ namespace PowerSarj_2022.DataAccess.Abstract
             {
                 return null;
             }
+        }
+
+        // Çalışıyor
+        public User DeleteUserWithUserId(string userid)
+        {
+
+            var model = _userService.GetObject(x => x.userid == userid);
+            _userService.Delete(model);
+            return model;            
+        }
+
+        public User UpdatedUserModel(UserUpdateDTO userUpdateDTO)
+        {
+            //var model = _userService.GetObject(x => x.userid == userUpdateDTO.userid); // include atılmıyo
+
+            var model = _db.Set<User>().Include(x=> x.devices).Include(x=> x.operations).Include(x=> x.fills).FirstOrDefault(x=> x.userid == userUpdateDTO.userid);
+
+            if (model != null)
+            {
+
+                #region DTO DAN GELEN VERİ BİR USER VERİSİNE DÖNÜŞTÜRLDÜ 
+
+                var configuration = new MapperConfiguration(opt =>
+                {
+                    opt.AddProfile(new UserDTOtoUserMapper());
+                });
+                
+                var mapper = configuration.CreateMapper();
+                var model2 =  mapper.Map<User>(userUpdateDTO);
+
+
+
+                model.cardid = model2.cardid;
+                model.balance = model2.balance;
+                model.username = model2.username;
+                model.site = model2.site;
+                model.password = model2.password;
+                model.__v = model2.__v;
+                model.balance = model2.balance;
+                model.chargingdevice = model2.chargingdevice;
+                model.updatedAt = DateTime.Now;
+
+
+
+        #endregion
+
+
+
+                 
+
+
+
+                #region User - User Mapplenmesi (dto dan user a dönen veri bir daha user dan user a maplenmek istedi)
+
+
+                //var configuration2 = new MapperConfiguration(opt =>
+                //{
+                //    opt.AddProfile(new UserToUserMapperForUpdateEvent());
+                //});
+
+                //var mapper2 = configuration2.CreateMapper();
+                //var model3 = mapper2.Map<User>(model2);
+
+
+                //model = model3;
+                #endregion
+
+
+
+
+                _userService.Update(model);
+
+                return model;
+            }
+            else
+            {
+                return null;
+            }
+
+
+
+
+
         }
     }
 }

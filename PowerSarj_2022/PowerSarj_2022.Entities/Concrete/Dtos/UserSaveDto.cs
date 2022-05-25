@@ -9,6 +9,8 @@ namespace PowerSarj_2022.Entities.Concrete.Dtos
 {
     public class UserSaveDto : IDto
     {
+
+        public int MyProperty { get; set; }
         public decimal balance { get; set; }
         public string cardid { get; set; }
         public DateTime date { get; set; }
