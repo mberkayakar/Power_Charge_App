@@ -10,8 +10,8 @@ namespace PowerSarj_2022.Entities.Concrete.Dtos
     public class UserListDto : IDto
     {
 
-        public int _id { get; set; }
-        public string UserId { get; set; }
+        public string _id { get; set; }
+        public string userId { get; set; }
         public string cardid { get; set; }
         public string username { get; set; }
         public string site { get; set; }
@@ -19,11 +19,13 @@ namespace PowerSarj_2022.Entities.Concrete.Dtos
 
         public List<string> devices { get; set; }
         public List<Operation> operations { get; set; }
+        public List<Fill> fills { get; set; }
+
         public DateTime date { get; set; }
         public int __v { get; set; }
         public decimal balance { get; set; }
         public string chargingdevice { get; set; }
-        public DateTime? updatedAt { get; set; }
+        public DateTime? updatedAt { get; set;  }
 
 
 

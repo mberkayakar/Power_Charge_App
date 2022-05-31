@@ -3,6 +3,7 @@ using PowerSarj_2022.Core.DataAccess.Abstract;
 using PowerSarj_2022.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace PowerSarj_2022.Business.Concrete
@@ -34,6 +35,11 @@ namespace PowerSarj_2022.Business.Concrete
             return (where != null) ? _genericRepository.GetAll(where) : _genericRepository.GetAll();
 
 
+        }
+
+        public IEnumerable<T> GetAllWithİnclude(Expression<Func<T, bool>> where = null, params Expression<Func<T, object>>[] includeProperty)
+        {
+            return _genericRepository.GetAllWıthInclude(where, includeProperty);
         }
 
         public T GetObject(Expression<Func<T, bool>> where = null)

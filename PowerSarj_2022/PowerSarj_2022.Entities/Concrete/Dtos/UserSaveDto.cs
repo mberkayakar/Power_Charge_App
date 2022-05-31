@@ -10,7 +10,6 @@ namespace PowerSarj_2022.Entities.Concrete.Dtos
     public class UserSaveDto : IDto
     {
 
-        public int MyProperty { get; set; }
         public decimal balance { get; set; }
         public string cardid { get; set; }
         public DateTime date { get; set; }
@@ -18,7 +17,7 @@ namespace PowerSarj_2022.Entities.Concrete.Dtos
         public List<Operation> operations { get; set; }
         public string password { get; set; }
         public string site { get; set; }
-        public string UserId { get; set; }
+        public string userId { get; set; }
         public string username { get; set; }
 
     }

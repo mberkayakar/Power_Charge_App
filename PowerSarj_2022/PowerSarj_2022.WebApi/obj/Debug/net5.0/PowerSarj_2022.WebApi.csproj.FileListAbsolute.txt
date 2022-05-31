@@ -72,3 +72,7 @@ C:\Users\Muhammed Berkay AKAR\Desktop\PowerCharge\PowerSarj_2022\PowerSarj_2022.
 C:\Users\Muhammed Berkay AKAR\Desktop\PowerCharge\PowerSarj_2022\PowerSarj_2022.WebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Muhammed Berkay AKAR\Desktop\PowerCharge\PowerSarj_2022\PowerSarj_2022.WebApi\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 C:\Users\Muhammed Berkay AKAR\Desktop\PowerCharge\PowerSarj_2022\PowerSarj_2022.WebApi\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Muhammed Berkay AKAR\Desktop\PowerCharge\PowerSarj_2022\PowerSarj_2022.WebApi\bin\Debug\net5.0\nlog.config
+C:\Users\Muhammed Berkay AKAR\Desktop\PowerCharge\PowerSarj_2022\PowerSarj_2022.WebApi\bin\Debug\net5.0\NLog.dll
+C:\Users\Muhammed Berkay AKAR\Desktop\PowerCharge\PowerSarj_2022\PowerSarj_2022.WebApi\bin\Debug\net5.0\NLog.Extensions.Logging.dll
+C:\Users\Muhammed Berkay AKAR\Desktop\PowerCharge\PowerSarj_2022\PowerSarj_2022.WebApi\bin\Debug\net5.0\NLog.Web.AspNetCore.dll

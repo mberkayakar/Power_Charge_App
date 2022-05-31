@@ -59,8 +59,17 @@ namespace PowerSarj_2022.WebApi
 
 
             services.AddControllers().AddNewtonsoftJson(options =>
-   options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+              options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+
+
+            //services.AddMvc()
+            //    .AddJsonOptions(
+            //        options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            //    );
+
+
+
 
             services.AddSwaggerGen(c =>
             {

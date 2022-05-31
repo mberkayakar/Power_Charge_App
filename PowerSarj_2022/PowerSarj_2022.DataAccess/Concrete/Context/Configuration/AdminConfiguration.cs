@@ -9,11 +9,13 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.Configuration
     {
         public void Configure(EntityTypeBuilder<Admin> builder)
         {
-            builder.HasKey(c => c.Id).HasName("AdminId");
-            builder.Property(c => c.Id).ValueGeneratedOnAdd();
-            builder.Property(c => c.Id).HasColumnName("AdminId");
-            builder.Property(c => c.Name).HasColumnName("AdminName");
-             
+            builder.HasKey(c => c._id);
+            builder.Property(c => c._id).ValueGeneratedOnAdd();
+
+            //builder.Property(c => c._id).ValueGeneratedOnAdd();
+            //builder.Property(c => c._id).HasColumnName("_id");
+            //builder.Property(c => c.Name).HasColumnName("_id");
+
             //builder.HasData(
             //    new Admin
             //    {
@@ -32,7 +34,7 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.Configuration
             //    );
 
 
-            
+
 
 
         }

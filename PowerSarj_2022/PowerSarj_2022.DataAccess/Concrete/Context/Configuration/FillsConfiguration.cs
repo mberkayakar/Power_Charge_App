@@ -8,7 +8,9 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
     {
         public void Configure(EntityTypeBuilder<Fill> builder)
         {
-            builder.HasKey(c => c.Id).HasName("FillId");
+            builder.HasKey(c => c._id);
+            builder.Property(c => c._id).ValueGeneratedOnAdd();
+
 
         }
     }

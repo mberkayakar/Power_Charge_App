@@ -29,8 +29,15 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
             modelBuilder.ApplyConfiguration(new FillsConfiguration());
             modelBuilder.ApplyConfiguration(new OperationsConfiguration());
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
+            modelBuilder.ApplyConfiguration(new AllowedSitesConfiguration());
 
-            modelBuilder.Entity<User>().HasMany(x => x.devices).WithOne(x => x.User).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+
+
+            
+            modelBuilder.Entity<User>().HasMany(x => x.devices).WithMany(x => x.User);
+                
+                
+                //.HasForeignKey(x => x.userid).OnDelete(DeleteBehavior.Cascade);
             
           
 

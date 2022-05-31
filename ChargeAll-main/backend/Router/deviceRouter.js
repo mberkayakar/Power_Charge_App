@@ -3,6 +3,8 @@ var app = express();
 var Device = require("../Model/Device.js");
 const router = express.Router();
 app.use(express.json());
+
+
 router.get("/", async(req, res) => {
   await  Device.find()
         .then((device) => {
@@ -12,6 +14,11 @@ router.get("/", async(req, res) => {
             res.json(err);
         });
 });
+
+
+
+
+
 
 router.get("/list",async (req, res) => {
     console.log(req.params)

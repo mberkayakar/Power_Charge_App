@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.DataAccess.Abstract;
 using PowerSarj_2022.Entities.Concrete.Dtos;
@@ -14,24 +15,23 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
         private readonly IUserService _userService;
+        private readonly ILogger<UsersController> _logger;
 
 
 
-
-        public UsersController(IUserService userservice)
+        public UsersController(IUserService userservice , ILogger<UsersController> logger)
         {
             _userService = userservice;
+            _logger = logger;
 
         }
 
-         
 
-
-        [HttpGet] // Complete
-        public IActionResult GetAllUsers()
+        [HttpGet]  // Tamamlandı 
+        public IActionResult GetAllUsers()      
         {
-
-            var model = _userService.GetAllUsers();
+            _logger.LogTrace("Tüm Userların Listelenmesi için istek gelindi ");
+                var model = _userService.GetAllUsers();
 
             if (model != null)
             {
@@ -44,24 +44,30 @@ namespace PowerSarj_2022.WebApi.Controllers
 
         }
 
-        [HttpGet("{_id}")]  // Complete
+
+
+
+        [HttpGet("{_id}")]    // tamamlandı 
         public IActionResult GetAllUsersWithId(string _id)
         {
 
-            var model = _userService.GetAllUsers(x=> x.userid== _id);
+            var model = _userService.GetAllUsers(x=> x._id== _id);
 
             if (model != null)
             {
-                return Ok(model);
+                 return Ok(model);
             }
             else
             {
                 return NotFound("Sistemde Kayıtlı herhangi bir kullanıcı bulunamadı ");
             }
 
-        }
+         }
 
-        [HttpGet("bysite/{sitename}")] // Complete
+
+
+
+        [HttpGet("bysite/{sitename}")]  // tamamlandı 
         public IActionResult GetAllUserWithSiteParameter(string sitename)
         {
             var model = _userService.GetAllUsers(x => x.site == sitename);
@@ -74,7 +80,7 @@ namespace PowerSarj_2022.WebApi.Controllers
         }
 
 
-        [HttpPost]  // Complete 
+        [HttpPost]      // tüm işlemleri tamamlandı // bir user a birden çok device durumu gerçekleştr , aynı device birden çok kullanıcıya da atılmaktadır.  // operasyonlar ilk etapta gelmedipği için ve filler boş bıkaktım sonrasında repository kısmında süreç düzenlenebilir 
         public IActionResult SaveUser(UserSaveDto userdto)
         {
             _userService.SaveUser(userdto); 
@@ -82,7 +88,15 @@ namespace PowerSarj_2022.WebApi.Controllers
         }
 
 
-        [HttpPost("addoperation")]  // Complete
+
+
+
+
+
+
+
+
+        [HttpPost("addoperation")]   // add operation da user a operation eklemek 
         public IActionResult AddOperationFromUser(AddOperationFromUser userdto)
         {
             if (userdto != null)
@@ -100,7 +114,7 @@ namespace PowerSarj_2022.WebApi.Controllers
 
        
         
-        [HttpPost("login")]  // Bitmedi buna JWT eklenecek // burada userlarin login olma isteklerini düşündüm projede anladıgım kadarı ile burası admin için kullanılmış.
+        [HttpPost("login")]   
         public IActionResult Loginevent(UserLoginDto userlogindto)
         {
             if (userlogindto.Password != "" && userlogindto.UserId != "")
@@ -121,7 +135,7 @@ namespace PowerSarj_2022.WebApi.Controllers
 
 
 
-        [HttpDelete("{id}")]   // Complete // verilen user id ye göre user in bilgilerinin silinmesi
+        [HttpDelete("{id}")]   
         public IActionResult DeleteUser(string id)
         {
             if (id != null && id!= "" )
@@ -140,7 +154,7 @@ namespace PowerSarj_2022.WebApi.Controllers
             return BadRequest("Lütfen Geçerli Bir şifre ve kullanıcıbilgisi giriniz ");
         }
 
-        [HttpPut("{id}")]  // Complete 
+        [HttpPut("{id}")]   
         public IActionResult UpdateUserİnformation(UserUpdateDTO userdto)
         {
 

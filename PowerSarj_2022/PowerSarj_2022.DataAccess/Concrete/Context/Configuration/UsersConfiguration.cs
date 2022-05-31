@@ -8,8 +8,14 @@ namespace PowerSarj_2022.DataAccess.Concrete.Context.EfContext
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(c => c.userid).HasName("UserId");
-          
+            builder.HasKey(c => c._id);
+            builder.Property(c => c._id).ValueGeneratedOnAdd();
+
+            
+            builder.HasIndex(c => c.username).IsUnique();
+            builder.HasIndex(c => c.userid).IsUnique();
+
+
         }
     }
 }

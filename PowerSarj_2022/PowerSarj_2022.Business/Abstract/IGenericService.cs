@@ -12,6 +12,7 @@ namespace PowerSarj_2022.Business.Abstract
         void Delete(T entity);
         T GetObject(Expression<Func<T, bool>> where = null);
         IEnumerable<T> GetAll(Expression<Func<T, bool>> where = null);
+        IEnumerable<T> GetAllWithİnclude(Expression<Func<T, bool>> where = null, params Expression<Func<T, object>>[] includeProperty);
 
     }
 }

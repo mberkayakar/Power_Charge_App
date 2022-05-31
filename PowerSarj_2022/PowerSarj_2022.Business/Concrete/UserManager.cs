@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PowerSarj_2022.Business.Concrete;
 using PowerSarj_2022.Business.Concrete.DTO;
 using PowerSarj_2022.Core.DataAccess.Abstract;
+using PowerSarj_2022.DataAccess.Concrete.Repository;
 using PowerSarj_2022.Entities.Concrete;
 using PowerSarj_2022.Entities.Concrete.Dtos;
 using System;
@@ -19,28 +20,39 @@ namespace PowerSarj_2022.DataAccess.Abstract
     {
 
         private readonly IUserRepository _userService;
+        private readonly IDeviceRepository _deviceRepository;
+
         private readonly DbContext _db;
 
-        public UserManager(IUserRepository genericRepository , DbContext db) : base(genericRepository)
+        public UserManager(IUserRepository genericRepository , DbContext db , IDeviceRepository deviceRepository) : base(genericRepository)
         {
             _db = db;
             _userService = genericRepository;
+            _deviceRepository = deviceRepository;
+
 
         }
 
 
         // Çalışıyor
-        public IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null)
+        public IEnumerable<UserListDto> GetAllUsers(Expression<Func<User, bool>> filter = null ) 
         {
             var model = new List<User>();
 
             if (filter != null)
             {
-                model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).Where(filter).ToList();
+
+                model = _userService.GetAllWıthInclude( filter ,x=> x.fills, x=> x.devices, x=> x.operations ).ToList();
+
+
+                //model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).Where(filter).ToList();
             }
             else
             {
-                model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
+                model = _userService.GetAllWıthInclude(null, x => x.fills, x => x.devices, x => x.operations).ToList();
+
+
+                //model = _db.Set<User>().Include(x => x.fills).Include(x => x.operations).Include(y => y.devices).ToList();
 
             }
 
@@ -62,12 +74,34 @@ namespace PowerSarj_2022.DataAccess.Abstract
             List<Device> devices2 = new List<Device>();
             foreach (var item in model)
             {
+
+                // operasyonlar içerisindeki user ları silme işlemi 
+                foreach (var operation in item.operations)
+                {
+                    if (operation!=null)
+                    {
+                        operation.user = null;
+                    }
+                }
+
+
+                foreach (var fill in item.fills)
+                {
+                    if (fill!= null)
+                    {
+                        fill.user = null;
+                    }
+                }
+
+
+
+
                 List<string> suruculer = new List<string>();
 
                 foreach (var item2 in item.devices)
                     suruculer.Add(item2.devicename);
 
-                model2.FirstOrDefault(x => x.UserId == item.userid).devices = suruculer;
+                model2.FirstOrDefault(x => x.userId == item.userid).devices = suruculer;
             }
         
        
@@ -103,7 +137,8 @@ namespace PowerSarj_2022.DataAccess.Abstract
             {
                 try
                 {
-                    dynamic singledevice = _db.Set<Device>().FirstOrDefault(x => x.devicename == item);
+                    dynamic singledevice = _deviceRepository.GetObject(x => x.deviceid == item);
+                        //_db.Set<Device>().FirstOrDefault(x => x.devicename == item);
                     if (singledevice != null)
                     {
                         model.devices.Add(singledevice);
@@ -247,5 +282,7 @@ namespace PowerSarj_2022.DataAccess.Abstract
 
 
         }
+
+       
     }
 }

@@ -6,13 +6,12 @@ namespace PowerSarj_2022.Entities.Concrete
 {
     public class Device : IEntity
     {
-        public int Id { get; set; }
-
+        public string _id { get; set; }
+        public string deviceid { get; set; }
         public string location { get; set; }
 
-
         // AC - DC olma durumu 
-        public string Type { get; set; }
+        public string type { get; set; }
 
         public virtual List<Operation> operations { get; set; }
         public virtual List<AllowedSites> allowedSites { get; set; }
@@ -27,8 +26,10 @@ namespace PowerSarj_2022.Entities.Concrete
 
        
         // Navigation Property
-        public  User User { get; set; }
-        public string UserId { get; set; }
+        // bir user birden çok alet ile şarj edebilir .
+        
+        public  List<User> User { get; set; }
+
 
 
 

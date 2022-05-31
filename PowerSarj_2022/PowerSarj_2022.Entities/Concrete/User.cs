@@ -9,7 +9,7 @@ namespace PowerSarj_2022.Entities.Concrete
     {
 
         // Sistemdeki userlar (otomatları kullanan kullanıcılar yani )
-            public int _id { get; set; }  // PK 
+            public string _id { get; set; }  // PK 
             public string userid { get; set; }  // string olması gerekiyo
             public string cardid { get; set; }
             public string username { get; set; }    // unique olacak 

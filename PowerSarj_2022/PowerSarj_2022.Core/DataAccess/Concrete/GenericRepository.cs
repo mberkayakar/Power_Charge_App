@@ -20,8 +20,6 @@ namespace PowerSarj_2022.Core.DataAccess.Concrete
             _db = db;
         }
 
-        
-
 
         public void Add(T entity)
         {
@@ -43,6 +41,26 @@ namespace PowerSarj_2022.Core.DataAccess.Concrete
                 return _db.Set<T>().Where(where).ToList();
             }
             return _db.Set<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllWıthInclude(Expression<Func<T, bool>> where = null, params Expression<Func<T, object>>[] includeProperty)
+        {
+
+            IQueryable<T> model = _db.Set<T>();
+            
+            if (where != null)
+            {
+                model = model.Where(where);
+            }
+
+            if (includeProperty.Any()) 
+            {
+                foreach (var item in includeProperty)
+                {
+                    model = model.Include(item); 
+                }
+            }
+            return model.ToList();
         }
 
         public T GetObject(Expression<Func<T, bool>> where = null)

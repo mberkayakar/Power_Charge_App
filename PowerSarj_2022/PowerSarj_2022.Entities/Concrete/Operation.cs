@@ -9,7 +9,7 @@ namespace PowerSarj_2022.Entities.Concrete
     {
 
 
-        public int Id { get; set; }
+        public string _id { get; set; }
         public string operation { get; set; }
         public double energy { get; set; }
         public int MyProperty { get; set; }
@@ -19,7 +19,7 @@ namespace PowerSarj_2022.Entities.Concrete
         public DateTime date { get; set; }
 
         // Navigation Properties 
-        public int? _id { get; set; }
+        public int userid { get; set; }
         public virtual User user { get; set; }
 
         public int deviceid { get; set; }
